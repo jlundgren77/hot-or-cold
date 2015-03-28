@@ -14,7 +14,7 @@ $(document).ready(function(){
     
     
 
-  	
+  	//on load start new game
   	newGame();
 
     $('#guessButton').on("click", function(event){
@@ -24,6 +24,7 @@ $(document).ready(function(){
 
     });
   	
+  	//start new game on click of new game button
     $('.new').on("click", function(event){
     	event.preventDefault();
     	newGame();
@@ -31,8 +32,12 @@ $(document).ready(function(){
 
 });
 
+//store random number
 var num;
+//store state of game play
 var in_play;
+
+
 function newGame(){
 		in_play = true;
 	    num = newNumber();
@@ -93,12 +98,7 @@ function guess(){
  	{
  		return false;
  	}
- 	// else if ($.isNumeric(num))
- 	// {
- 	// 	return false;
- 	// }
  	
-
  	return true;
 
  }
