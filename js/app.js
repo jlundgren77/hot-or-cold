@@ -16,6 +16,7 @@ $(document).ready(function(){
 
   	
   	newGame();
+
     $('#guessButton').on("click", function(event){
 
     	event.preventDefault();
@@ -33,12 +34,14 @@ $(document).ready(function(){
 var num;
 var in_play;
 function newGame(){
+		in_play = true;
 	    num = newNumber();
 	    $('#count').text(0);
 	    $('#feedback').text("Make your Guess!");
 	    $('#guessList').text(" ");
-	    $('#userGuess').text("Enter Your Guess");
-	    in_play = true;
+	    document.getElementById("userGuess").value = "";
+	    $("#guessButton").attr("value", "Guess");
+	    $("#userGuess").prop('disabled', false);
 	    console.log(num);
 	    
     }
@@ -64,9 +67,11 @@ function guess(){
 			 updateCount();
 			 feedback(guessInput);
 			 if (guessInput == num) {
+			 	$("#guessButton").attr("value", "Game Over");
+			 	$("#userGuess").prop('disabled', true);
 			 	in_play = false;
 			 }
-	         console.log(in_play);
+	         
 		}
 	}
 	//prevent further input if number guessed
@@ -83,7 +88,7 @@ function guess(){
 
  function numValidation(guess) {
      var num = parseInt(guess);
-     console.log(num);
+     
  	if (num < 1 || num > 100|| isNaN(num))
  	{
  		return false;
@@ -126,7 +131,8 @@ function feedback(guess){
 	}
 	else {
 		msg = "Bingo! Play Again?";
-		$('#userGuess').text("Click Play Again");
+
+
 	}
 	
 	feedback.innerHTML = msg;
